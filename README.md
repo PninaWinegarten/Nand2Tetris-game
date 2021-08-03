@@ -1,3 +1,3 @@
-# Nand2Tetris-game
+# Nand2Tetris-game/ Pnina Winegarten
 
 ![caption](game_example.gif)
