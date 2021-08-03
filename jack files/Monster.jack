@@ -1,0 +1,63 @@
+class Monster{
+
+    field int x;
+    field int y;
+    field boolean moveRight;
+    field int index;
+    field GUI monsterGUI;
+
+    constructor Monster new(int xMonster, int yMonster, boolean moveDirection) {
+
+        let x = xMonster;
+        let y = yMonster;
+        let moveRight = moveDirection;
+        let index = xMonster;
+        let monsterGUI = GUI.new();
+        do monsterGUI.drawMonster(x, y);
+
+        return this;
+    }
+
+    // Return the x location of the monster.
+    method int getX(){
+        return x;
+    }
+
+    // Return the y location of the monster.
+    method int getY(){
+        return y;
+    }
+
+    // Move the monster left and right.
+    method void move(){
+        // If it is the time to go left and the hero didn't get the begining of the board.
+        if(x > 0 & (~moveRight)){
+            // Remove the monster from it's location and draw it one step left.
+            do monsterGUI.removeMonster(x + (index*15), y);
+            let x = x - 1;
+            do monsterGUI.drawMonster(x, y);
+            let index = index - 1;
+        }
+        else{
+            let moveRight = true;
+            // If it is the time to go right and the hero didn't get the end of the board.
+            if (x < 31 & (moveRight)){
+                // Remove the monster from it's location and draw it one step right.
+                do monsterGUI.removeMonster(x + (index*15), y);
+                let x = x + 1;
+                do monsterGUI.drawMonster(x, y);
+                let index = index + 1;
+            }
+            else{
+                let moveRight = false;
+            }                  
+        }
+        return;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+}
